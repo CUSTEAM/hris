@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>	
+	
+	<package name="Publiclogin" extends="abstract_struts" namespace="/">		
+		<action name="Logout" class="action.Logout">
+			<result name="logout">/index.jsp</result>
+		</action>		
+	</package>
+	
+	<package name="unit" extends="abstract_struts" namespace="/">		
+		<action name="UnitManager" class="action.unit.UnitManagerAction">
+			<result>jsp/UnitManager.jsp</result>
+			<result name="editUnit">jsp/UnitManager/editUnit.jsp</result>
+			<result name="editCampus">jsp/UnitManager/editCampus.jsp</result>
+			<result name="editCollege">jsp/UnitManager/editCollege.jsp</result>
+			<result name="editDept">jsp/UnitManager/editDept.jsp</result>
+		</action>				
+	</package>
+	
+	<package name="empl" extends="abstract_struts" namespace="/">		
+		<action name="EmplManager" class="action.empl.EmplManagerAction">
+			<result>jsp/EmplManager.jsp</result>
+		</action>	
+		
+		<action name="EmplTechlimit" class="action.empl.EmplTechlimitAction">
+			<result>jsp/EmplTechlimit.jsp</result>
+		</action>
+		
+		<action name="Print" class="action.PrintAction">
+			<result>jsp/Print.jsp</result>
+		</action>			
+	</package>
+	
+	
+	
+</struts>
