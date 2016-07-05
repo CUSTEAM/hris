@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-<title>Insert title here</title>
+<title>單位資料管理</title>
 <script src="/eis/inc/js/plugin/bootstrap-typeahead.js"></script>
 <script src="/eis/inc/js/plugin/json2.js"></script>
 <script src="/eis/inc/js/plugin/jquery-ui.js"></script>
@@ -69,24 +69,24 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<div class="alert">
+<div class="bs-callout bs-callout-warning" id="callout-helper-pull-navbar">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong>單位資料管理</strong>
 </div>
 
-<form action="UnitManager" method="post">		
+<form action="UnitManager" class="form-inline" method="post">		
 <table class="table">
 	<tr>
 		<td>名稱</td>
 		<td>
-		<select id="campus" name="campus" onMouseup="checkUnit();" name="campus">
+		<select class="selectpicker" onMouseup="checkUnit();" name="campus">
 			<option value="">--</option>			
 			<c:forEach items="${allUnit}" var="c">
 			<option <c:if test="${c.id eq unit.campus}">selected</c:if> value="${c.id}">${c.name}</option>
 			</c:forEach>
 		</select>
 		
-		<select id="parent_unit" name="pid" onMouseup="checkUnit();" name="parent_unit">
+		<select class="selectpicker" id="parent_unit" name="pid" onMouseup="checkUnit();" name="parent_unit">
 			<option value="">--</option>
 			<c:forEach items="${allUnit}" var="c">
 				<c:forEach items="${c.unit}" var="u">
@@ -95,52 +95,52 @@ $(document).ready(function() {
 			</c:forEach>
 		</select>
 				
-		<input type="text" name="name" value="${unit.name}"/>
+		<input type="text" class="form-control" name="name" value="${unit.name}"/>
 		</td>
 	</tr>
 
-	<tr>
+	<!--tr>
 		<td nowrap>代碼/簡稱</td>
 		<td width="100%">
-		<input type="text" name="id" readonly class="span1" value="${unit.id}"/>
-		<input type="text" name="sname" value=""/>		
+		<input type="hidden" name="id" readonly class="span1" value="${unit.id}"/>
+		<input type="text" class="" name="sname" value=""/>		
 		</td>
-	</tr>
+	</tr-->
 	
 	<tr>
 		<td>英文名稱</td>
-		<td><input type="text" name="ename" value="${unit.ename}"/></td>
+		<td><input class="form-control" type="text" name="ename" value="${unit.ename}"/></td>
 	</tr>
 	
 	<tr>
 		<td>地點</td>
-		<td><input type="text" name="location" value="${unit.location}"/></td>
+		<td><input class="form-control" type="text" name="location" value="${unit.location}"/></td>
 	</tr>
 	
 	<tr>
 		<td>電話</td>
-		<td><input type="text" name="phone" value="${unit.phone}"/></td>
+		<td><input class="form-control" type="text" name="phone" value="${unit.phone}"/></td>
 	</tr>
 	
 	<tr>
 		<td>傳真</td>
-		<td><input type="text" name="fax" value="${unit.fax}"/></td>
+		<td><input class="form-control" type="text" name="fax" value="${unit.fax}"/></td>
 	</tr>
 	
 	<tr>
 		<td>電子郵件</td>
-		<td><input type="text" name="email" value="${unit.email}"/></td>
+		<td><input class="form-control" type="text" name="email" value="${unit.email}"/></td>
 	</tr>
 	
 	<tr>
 		<td>網站</td>
-		<td><input type="text" name="website" value="${unit.website}"/></td>
+		<td><input class="form-control" type="text" name="website" value="${unit.website}"/></td>
 	</tr>
 	
 	<tr>
 		<td>單位主管</td>
 		<td>
-		<input class="span4" onClick="$('#idiot').val(''), $('#leader').val('');" autocomplete="off" 
+		<input class="form-control" onClick="$('#idiot').val(''), $('#leader').val('');" autocomplete="off" 
 		type="text" id="idiot" value="${nameno}" name="nameno" data-provide="typeahead" placeholder="姓名或身分證" />
 		<input type="hidden" id="leader" value="${unit.leader}" name="leader"/>
 		</td>
@@ -149,7 +149,7 @@ $(document).ready(function() {
 	<tr>
 		<td>單位助理</td>
 		<td>
-		<input class="span4" onClick="$('#ass').val(''), $('#assistant').val('');" autocomplete="off" 
+		<input class="form-control" onClick="$('#ass').val(''), $('#assistant').val('');" autocomplete="off" 
 		type="text" id="ass" value="${ass}" name="ass" data-provide="typeahead" placeholder="姓名或身分證" />
 		<input type="hidden" id="assistant" value="${unit.assistant}" name="assistant"/>
 		</td>
@@ -159,7 +159,7 @@ $(document).ready(function() {
 		<td></td>
 		<td>
 		<button class="btn btn-danger" name="method:saveUnit" type="submit">儲存</button>
-		<a href="UnitManager" class="btn">離開</a>
+		<a href="UnitManager" class="btn btn-default">離開</a>
 		</td>
 	</tr>
 	

@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-<title>Insert title here</title>
+<title>院資料管理</title>
 <script src="/eis/inc/js/plugin/bootstrap-typeahead.js"></script>
 <script src="/eis/inc/js/plugin/json2.js"></script>
 <script src="/eis/inc/js/plugin/jquery-ui.js"></script>
@@ -74,12 +74,12 @@ $(document).ready(function() {
 
 
 
-<div class="alert">
+<div class="bs-callout bs-callout-warning" id="callout-helper-pull-navbar">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>校區資料管理</strong>
+    <strong>院資料管理</strong>
 </div>
 
-<form action="UnitManager" method="post">
+<form action="UnitManager" class="form" method="post">
 
 
 
@@ -87,44 +87,44 @@ $(document).ready(function() {
 		
 <table class="table">
 	<tr>
-		<td nowrap>代碼/名稱</td>
+		<td nowrap>名稱</td>
 		<td width="100%">
-		<input type="text" name="id" readonly class="span1" value="${unit.id}"/>
-		<input type="text" name="name" value="${unit.name}"/>
+		<input type="hidden" name="id" readonly class="form-control" value="${unit.id}"/>
+		<input type="text" name="name" class="form-control" value="${unit.name}"/>
 		</td>
 	</tr>
 	
 	<tr>
 		<td>英文名稱</td>
 		<td>
-		<input type="text" class="span6" name="ename" value="${unit.ename}"/>
+		<input type="text" class="form-control" name="ename" value="${unit.ename}"/>
 		</td>
 	</tr>
 	
 	<tr>
 		<td>電話</td>
-		<td><input type="text" name="phone" value="${unit.phone}"/></td>
+		<td><input type="text" name="phone" class="form-control" value="${unit.phone}"/></td>
 	</tr>
 	
 	<tr>
 		<td>傳真</td>
-		<td><input type="text" name="fax" value="${unit.fax}"/></td>
+		<td><input type="text" name="fax" class="form-control" value="${unit.fax}"/></td>
 	</tr>
 	
 	<tr>
 		<td>電子郵件</td>
-		<td><input type="text" name="email" value="${unit.email}"/></td>
+		<td><input type="text" name="email" class="form-control" value="${unit.email}"/></td>
 	</tr>
 	
 	<tr>
 		<td>網站</td>
-		<td><input type="text" name="website" value="${unit.website}"/></td>
+		<td><input type="text" name="website"class="form-control" value="${unit.website}"/></td>
 	</tr>
 	
 	<tr>
 		<td>院長</td>
 		<td>
-		<input class="span4" onClick="$('#idiot').val(''), $('#leader').val('');" autocomplete="off" 
+		<input class="form-control" onClick="$('#idiot').val(''), $('#leader').val('');" autocomplete="off" 
 		type="text" id="idiot" value="${nameno}" name="nameno" data-provide="typeahead" placeholder="姓名或身分證" />
 		<input type="hidden" id="leader" value="${unit.leader}" name="leader"/>
 		</td>
@@ -133,7 +133,7 @@ $(document).ready(function() {
 	<tr>
 		<td>院助理</td>
 		<td>
-		<input class="span4" onClick="$('#ass').val(''), $('#assistant').val('');" autocomplete="off" 
+		<input class="form-control" onClick="$('#ass').val(''), $('#assistant').val('');" autocomplete="off" 
 		type="text" id="ass" value="${ass}" name="ass" data-provide="typeahead" placeholder="姓名或身分證" />
 		<input type="hidden" id="assistant" value="${unit.assistant}" name="assistant"/>
 		</td>

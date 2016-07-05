@@ -14,34 +14,42 @@
 </head>
 <body>
 <form action="EmplTechlimit" method="post" class="form-inline">
-<div class="alert" style="position: fixed; width:95%; z-index:20;">
-教師各項時數輸入完成請先點選 
-<button type="submit" class="btn btn-small btn-danger" name="method:save">儲存</button>
+<div class="bs-callout bs-callout-warning" id="callout-helper-pull-navbar">
+教師各項時數輸入
 </div>
-<br><br><br>
 	<table class="table">
 		<tr>
 			<td>
-			<div class="input-prepend">
-				<span class="add-on">教師姓名</span>
-				<input type="text" placeholder="教師完整姓名" class="span3 techid" name="techid" id="techid" value="${techid}" onClick="this.value='';" autocomplete="off" data-provide="typeahead"/>
-			</div>
-			<div class="input-prepend">
-			<span class="add-on">教師職級</span>
-			<select name="pcode" id="pcode">					
-				<option value="">所有教師</option>
-				<c:forEach items="${codes}" var="c">
-				<option <c:if test="${c.id eq pcode}">selected</c:if> value="${c.id}">${c.name}</option>
-				</c:forEach>
-			</select>
-			</div>
 			
+		    <div class="input-group">
+		    	<span class="input-group-addon">教師姓名</span>
+		      	<input type="text" placeholder="教師完整姓名" class="form-control techid" name="techid" id="techid" value="${techid}" onClick="this.value='';" autocomplete="off" data-provide="typeahead"/>
+		    </div>
+			
+			</td>
+		</tr>
+			<td>
+			
+			
+			    <div class="input-group">
+			    	<span class="input-group-addon">教師職級</span>
+			      	<select name="pcode" id="pcode" class="form-control">					
+					<option value="">所有教師</option>
+						<c:forEach items="${codes}" var="c">
+						<option <c:if test="${c.id eq pcode}">selected</c:if> value="${c.id}">${c.name}</option>
+						</c:forEach>
+					</select>
+			    </div>
+			
+			
+			</td>
+		</tr>
+		<tr>
+			<td>			
 			<div class="btn-group">
 			<button name="method:search" class="btn btn-danger" type="submit">尋找教師</button>
-			<a href="EmplTechlimit" class="btn">重新查詢</a>
-			</div>
-			
-			
+			<a href="EmplTechlimit" class="btn btn-default">重新查詢</a>
+			</div>			
 			</td>
 		</tr>
 	</table>
@@ -53,30 +61,38 @@
 			<td colspan="3" align="right"></td>
 			<td nowrap>填滿</td>
 			<td nowrap>
-				<div class="input-append">
-				<input type="text" name="set" id="set" style="me-mode:disabled;" class="span1" />
-				<button class="btn" onClick="$('.set').val($('#set').val())" type="button"><i class=" icon-arrow-down"></i></button>
+			<div class="input-group">				
+				<input type="text" name="set" id="set" style="me-mode:disabled; width:100px;" class="form-control" />
+				<span class="input-group-btn">
+				<button class="btn btn-default" onClick="$('.set').val($('#set').val())" type="button"><i class="glyphicon glyphicon-chevron-down"></i></button>
+				</span>
+			</div>
+			
+			</td>
+			<td nowrap>				
+				<div class="input-group">				
+				<input type="text" name="over_set" id="over_set" style="me-mode:disabled; width:100px;" class="form-control"/>
+				<span class="input-group-btn">
+				<button class="btn btn-default" onClick="$('.over_set').val($('#over_set').val())" type="button"><i class="glyphicon glyphicon-chevron-down"></i></button>
+				</span>
 				</div>
 			</td>
 			<td nowrap>
-				<div class="input-append">
-				<input type="text" name="over_set" id="over_set" style="me-mode:disabled;" class="span1"/>
-				<button class="btn" onClick="$('.over_set').val($('#over_set').val())" type="button"><i class=" icon-arrow-down"></i></button>
-				</div>
-			</td>
-			<td nowrap>
-				<div class="input-append">
-				<input type="text" name="stay" id="stay" style="me-mode:disabled;" class="span1"/>
-				<button class="btn" onClick="$('.stay').val($('#stay').val())" type="button"><i class=" icon-arrow-down"></i></button>
+			
+				<div class="input-group">				
+				<input type="text" name="stay" id="stay" style="me-mode:disabled; width:100px;" class="form-control"/>
+				<span class="input-group-btn">
+				<button class="btn btn-default" onClick="$('.stay').val($('#stay').val())" type="button"><i class="glyphicon glyphicon-chevron-down"></i></button>
+				</span>
 				</div>
 			</td>
 			<td width="35%"></td>
 		</tr>
 		<tr>
-			<th data-sort="string" style="cursor:n-resize;" nowrap>主聘科系 <i class="icon-chevron-down"></i></th>
-			<th data-sort="string" style="cursor:n-resize;" nowrap>教師職級 <i class="icon-chevron-down"></i></th>
-			<th data-sort="string" style="cursor:n-resize;" nowrap>本校職稱 <i class="icon-chevron-down"></i></td>
-			<th data-sort="string" style="cursor:n-resize;" nowrap>教師姓名 <i class="icon-chevron-down"></i></th>
+			<th data-sort="string" style="cursor:n-resize;" nowrap>主聘科系 <i class="glyphicon glyphicon-sort-by-alphabet"></i></th>
+			<th data-sort="string" style="cursor:n-resize;" nowrap>教師職級 <i class="glyphicon glyphicon-sort-by-alphabet"></i></th>
+			<th data-sort="string" style="cursor:n-resize;" nowrap>本校職稱 <i class="glyphicon glyphicon-sort-by-alphabet"></i></td>
+			<th data-sort="string" style="cursor:n-resize;" nowrap>教師姓名 <i class="glyphicon glyphicon-sort-by-alphabet"></i></th>
 			<th data-sort="string" style="cursor:n-resize;" nowrap>基本鐘點</th>
 			<th data-sort="string" style="cursor:n-resize;" nowrap>可超鐘點 </th>
 			<th data-sort="string" style="cursor:n-resize;" nowrap>扣除留校時數</th>
@@ -88,21 +104,19 @@
 		<tr>
 			<td nowrap>${e.unitname}</td>
 			<td nowrap>${e.name}</td>
-			<td>${e.sname}</td>
+			<td style="width:33%;">${e.sname}</td>
 			<td nowrap>${e.cname}</td>
 			<td nowrap>
 			<input type="hidden" name="idno" value="${e.idno}" />
 			<input type="hidden" name="Oid" value="${e.Oid}" />
-			<input type="text" name="time" class="span1 set" value="${e.time}" style="me-mode:disabled; font-size:20px;" size="4" />
+			<input type="text" name="time" class="form-control set" value="${e.time}" style="width:100px; me-mode:disabled; font-size:20px;" />
 			</td>
-			<td><input type="text" name="time_over" id="time_over" class="span1 over_set" value="${e.time_over}" style="me-mode:disabled;" /></td>
-			<td><input type="text" name="time_stay" id="time_stay" class="span1 stay" value="${e.time_stay}"onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" 
-                                    onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'0')}else{this.value=this.value.replace(/\D/g,'')}" style="me-mode:disabled;" />
-			
+			<td><input type="text" name="time_over" id="time_over" class="form-control over_set" value="${e.time_over}" style="width:100px; me-mode:disabled;" /></td>
+			<td><input type="text" name="time_stay" id="time_stay" class="form-control stay" value="${e.time_stay}"onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" 
+                onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'0')}else{this.value=this.value.replace(/\D/g,'')}" style="width:100px; me-mode:disabled;" />
 			</td>
-			<td nowrap>
+			<td nowrap width="100%">
 			${e.thour}/${e.stay}
-			
 			</td>
 		</tr>
 		</c:forEach>
@@ -110,7 +124,7 @@
 	</table>
 	<div class="btn-group">
 	<button name="method:save" class="btn btn-large btn-danger">儲存</button>
-	<a href="EmplTechlimit" class="btn btn-large">取消</a>
+	<a href="EmplTechlimit" class="btn btn-default btn-large">取消</a>
 	</div>
 	<script>
 	$("#row").stupidtable();

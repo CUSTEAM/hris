@@ -9,23 +9,21 @@
 </head>
 <body>
 
-<div class="alert">
+<div class="bs-callout bs-callout-warning" id="callout-helper-pull-navbar">
 <button type="button" class="close" data-dismiss="alert">&times;</button>
-<strong>人事查詢列印</strong> 
-<div id="funbtn" rel="popover" title="說明" 
-data-content="選擇範圍點選列印，標題、統計等其它細節資料，於報表中的頁首/頁尾，請以預覽列印檢視" data-placement="right" class="btn btn-warning">?</div>
+<strong>報表列印</strong> 
 </div>
 
 <form action="/hris/Print" class="form-horizontal">
 
-<table class="table text-info">
+<table class="table">
 	<tr>
 		
-		<td class="control-group info" width="100%">
+		<td width="100%">
 		<div class="btn-group">
-			<button class="btn" name="method:StayTimePrint">留校時間</button>
-			<button class="btn" name="method:RetirePrint">退撫資料</button>
-			<button class="btn" name="method:BirthPrint">當月生日</button>
+			<button class="btn btn-default" name="method:StayTimePrint">留校時間</button>
+			<button class="btn btn-default" name="method:RetirePrint">退撫資料</button>
+			<button class="btn btn-default" name="method:BirthPrint">當月生日</button>
 		</div>
 		</td>
 	</tr>

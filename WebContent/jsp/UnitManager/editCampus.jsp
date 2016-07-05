@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-<title>Insert title here</title>
+<title>校區資料管理</title>
 <script src="/eis/inc/js/plugin/bootstrap-typeahead.js"></script>
 <script src="/eis/inc/js/plugin/json2.js"></script>
 <script src="/eis/inc/js/plugin/jquery-ui.js"></script>
@@ -72,12 +72,12 @@ $(document).ready(function() {
 
 
 
-<div class="alert">
+<div class="bs-callout bs-callout-warning" id="callout-helper-pull-navbar">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong>校區資料管理</strong>
 </div>
 
-<form action="UnitManager" method="post">
+<form action="UnitManager" class="form" method="post">
 
 
 
@@ -85,22 +85,22 @@ $(document).ready(function() {
 		
 <table class="table">
 	<tr>
-		<td nowrap>代碼/名稱</td>
+		<td nowrap>校區名稱</td>
 		<td width="100%">
-		<input type="text" name="id" readonly class="span1" value="${unit.id}"/>
-		<input type="text" name="name" value="${unit.name}"/>
+		<input type="hidden" name="id" readonly class="form-control" value="${unit.id}"/>
+		<input type="text" name="name" class="form-control" value="${unit.name}"/>
 		</td>
 	</tr>
 	
 	<tr>
 		<td>地址</td>
-		<td><input class="span6" type="text" name="ename" value="${unit.address}"/></td>
+		<td><input class="form-control" type="text" name="ename" value="${unit.address}"/></td>
 	</tr>
 	
 	<tr>
 		<td>主管</td>
 		<td>
-		<input class="span4" onClick="$('#idiot').val(''), $('#leader').val('');" autocomplete="off" 
+		<input class="form-control" onClick="$('#idiot').val(''), $('#leader').val('');" autocomplete="off" 
 		type="text" id="idiot" value="${nameno}" name="nameno" data-provide="typeahead" placeholder="姓名或身分證" />
 		<input type="hidden" id="leader" value="${unit.leader}" name="leader"/>
 		</td>
@@ -109,7 +109,7 @@ $(document).ready(function() {
 	<tr>
 		<td>助理</td>
 		<td>
-		<input class="span4" onClick="$('#ass').val(''), $('#assistant').val('');" autocomplete="off" 
+		<input class="form-control" onClick="$('#ass').val(''), $('#assistant').val('');" autocomplete="off" 
 		type="text" id="ass" value="${ass}" name="ass" data-provide="typeahead" placeholder="姓名或身分證" />
 		<input type="hidden" id="assistant" value="${unit.assistant}" name="assistant"/>
 		</td>

@@ -94,10 +94,10 @@ $(document).ready(function() {
 
 <div class="alert">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>校區資料管理</strong>
+    <strong>校區資料管理?</strong>
 </div>
 
-<form action="UnitManager" method="post">
+<form action="UnitManager" class="form" method="post">
 
 
 
@@ -105,44 +105,44 @@ $(document).ready(function() {
 		
 <table class="table">
 	<tr>
-		<td nowrap>代碼/名稱</td>
+		<td nowrap>名稱</td>
 		<td width="100%">
-		<input type="text" name="id" readonly class="span1" value="${unit.id}"/>
-		<input type="text" name="name" value="${unit.name}"/>
+		<input type="hidden" name="id" readonly class="span1" value="${unit.id}"/>
+		<input class="form-control" type="text" name="name" value="${unit.name}"/>
 		</td>
 	</tr>
 	
 	<tr>
 		<td>英文名稱</td>
 		<td>
-		<input type="text" class="span6" name="ename" value="${unit.ename}"/>
+		<input type="text" class="form-control" name="ename" value="${unit.ename}"/>
 		</td>
 	</tr>
 	
 	<tr>
 		<td>電話</td>
-		<td><input type="text" name="phone" value="${unit.phone}"/></td>
+		<td><input class="form-control" type="text" name="phone" value="${unit.phone}"/></td>
 	</tr>
 	
 	<tr>
 		<td>傳真</td>
-		<td><input type="text" name="fax" value="${unit.fax}"/></td>
+		<td><input class="form-control" type="text" name="fax" value="${unit.fax}"/></td>
 	</tr>
 	
 	<tr>
 		<td>電子郵件</td>
-		<td><input type="text" name="email" value="${unit.email}"/></td>
+		<td><input class="form-control" type="text" name="email" value="${unit.email}"/></td>
 	</tr>
 	
 	<tr>
 		<td>網站</td>
-		<td><input type="text" name="website" value="${unit.website}"/></td>
+		<td><input class="form-control" type="text" name="website" value="${unit.website}"/></td>
 	</tr>
 	
 	<tr>
 		<td>系主任</td>
 		<td>
-		<input class="span4" onClick="$('#idiot').val(''), $('#leader').val('');" autocomplete="off" 
+		<input class="form-control" onClick="$('#idiot').val(''), $('#leader').val('');" autocomplete="off" 
 		type="text" id="idiot" value="${nameno}" name="nameno" data-provide="typeahead" placeholder="姓名或身分證" />
 		<input type="hidden" id="leader" value="${unit.director}" name="leader"/>
 		</td>
@@ -151,7 +151,7 @@ $(document).ready(function() {
 	<tr>
 		<td>系助理</td>
 		<td>
-		<input class="span4" onClick="$('#ass').val(''), $('#assistant').val('');" autocomplete="off" 
+		<input class="form-control" onClick="$('#ass').val(''), $('#assistant').val('');" autocomplete="off" 
 		type="text" id="ass" value="${ass}" name="ass" data-provide="typeahead" placeholder="姓名或身分證" />
 		<input type="hidden" id="assistant" value="${unit.assistant}" name="assistant"/>
 		</td>
@@ -160,7 +160,7 @@ $(document).ready(function() {
 	<tr>
 		<td>系教官</td>
 		<td>
-		<input class="span4" onClick="$('#mil').val(''), $('#military').val('');" autocomplete="off" 
+		<input class="form-control" onClick="$('#mil').val(''), $('#military').val('');" autocomplete="off" 
 		type="text" id="mil" value="${mil}" name="mil" data-provide="typeahead" placeholder="姓名或身分證" />
 		<input type="hidden" id="military" value="${unit.military}" name="military"/>
 		</td>
