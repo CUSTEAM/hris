@@ -23,8 +23,6 @@ $(document).ready(function() {
 		$("#add_unit").val("");
 	})	
 	
-	
-	
 	$(".username").typeahead({
 		//remote:"#student_no",
 		source : [],
@@ -41,8 +39,11 @@ $(document).ready(function() {
 				}
 			});
 		}		
-	});		
+	});	
 	
+	<c:if test="${add==true}">
+	$('.nba').attr("disabled","true");
+	</c:if>
 });
 
 
@@ -238,7 +239,7 @@ $(document).ready(function() {
 			</tr>
 			<c:forEach items="${ques}" var="q">
 			<tr>
-				<td><input type="checkbox" /></td>
+				<td><input type="checkbox" class="" /></td>
 				<td nowrap>${q.no}</td>
 				<td nowrap>${q.recName}</td>
 				<td nowrap>${q.sigName}</td>
@@ -291,8 +292,8 @@ $(document).ready(function() {
 				</c:forEach>
 			</table>
 			<div class="panel-body" style="white-space: nowrap;">
-			<button style="width:50%" class="btn btn-success" name="method:sign">選取簽收</button>
-			<button style="width:50%" class="btn btn-default" name="method:search">選取刪除</button>
+			<button style="width:50%" class="btn btn-success nba" name="method:sign">選取簽收</button>
+			<button style="width:50%" class="btn btn-default nba" name="method:search">選取刪除</button>
 			</div>
 		</div>
 		</td>

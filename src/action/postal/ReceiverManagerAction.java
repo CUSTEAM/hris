@@ -69,7 +69,13 @@ public class ReceiverManagerAction extends BaseAction{
 			mail.setNo(add_no[i]);
 			mail.setStor(add_stor);
 			mail.setFromr(add_from);
-			if(!add_username.equals(""))mail.setUsername(add_username.substring(0, add_username.indexOf(",")));
+			
+			if(!add_username.equals("")){
+				mail.setUsername(add_username.substring(0, add_username.indexOf(",")));
+			}else{
+				mail.setUnit(add_unit);
+			}
+			
 			if(add_recDate.equals("")){
 				mail.setRecDate(d);
 			}else{
@@ -79,13 +85,8 @@ public class ReceiverManagerAction extends BaseAction{
 					mail.setRecDate(d);
 				}
 			}
-			if(!add_unit.equals(""))mail.setUnit(add_unit);
 			df.update(mail);
 		}
-		
-		
-		
-		
 		
 		request.setAttribute("mails", df.sqlGet("SELECT cu.id as unitNo, cu.name as unitName, "
 		+ "cd.id as deptNo, cd.name as deptName, m.recDate, m.Oid, m.no, m.fromr, e.cname, m.signer, "
@@ -95,7 +96,7 @@ public class ReceiverManagerAction extends BaseAction{
 		
 		
 		request.setAttribute("unitMails", getUnitMails());
-		
+		request.setAttribute("add", true);
 		
 		return SUCCESS;
 	}
