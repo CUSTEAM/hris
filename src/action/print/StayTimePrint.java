@@ -18,8 +18,9 @@ public class StayTimePrint extends BaseAction{
 	List<Map>empls;
 	List<Map>enough;
 	List<Map>alltime;
+	String kind;
 	Map info;
-	public StayTimePrint(HttpServletResponse response, List<Map>none, List<Map>edit, List<Map>empls, List<Map>enough, List<Map>alltime, Map info){
+	public StayTimePrint(HttpServletResponse response,String kind, List<Map>none, List<Map>edit, List<Map>empls, List<Map>enough, List<Map>alltime, Map info){
 		this.response=response;
 		this.none=none;
 		this.edit=edit;
@@ -27,6 +28,7 @@ public class StayTimePrint extends BaseAction{
 		this.enough=enough;
 		this.alltime=alltime;
 		this.info=info;
+		this.kind=kind;
 	}
 	
 	public void print() throws IOException{		
@@ -235,8 +237,15 @@ public class StayTimePrint extends BaseAction{
 		out.println ("    <Cell ss:StyleID='s79'><Data ss:Type='String'>姓名</Data></Cell>");
 		out.println ("    <Cell ss:StyleID='s79'><Data ss:Type='String'>職稱</Data></Cell>");
 		out.println ("    <Cell ss:StyleID='s79'><Data ss:Type='String'>主聘系所</Data></Cell>");
-		out.println ("    <Cell ss:StyleID='s79'><Data ss:Type='String'>應設</Data></Cell>");
-		out.println ("    <Cell ss:StyleID='s79'><Data ss:Type='String'>實設</Data></Cell>");
+		if(kind.equals("1")){
+			out.println ("    <Cell ss:StyleID='s79'><Data ss:Type='String'>應設</Data></Cell>");
+			out.println ("    <Cell ss:StyleID='s79'><Data ss:Type='String'>實設</Data></Cell>");
+		}else{
+			out.println ("    <Cell ss:StyleID='s79'><Data ss:Type='String'>班級數</Data></Cell>");
+			out.println ("    <Cell ss:StyleID='s79'><Data ss:Type='String'>時數</Data></Cell>");
+		}
+		
+		
 		out.println ("    <Cell ss:StyleID='s79'><Data ss:Type='String'>行動電話</Data></Cell>");
 		out.println ("    <Cell ss:StyleID='s79'><Data ss:Type='String'>電子郵件</Data></Cell>");
 		out.println ("   </Row>");
@@ -414,7 +423,11 @@ public class StayTimePrint extends BaseAction{
 			out.println ("  </Table>");
 			out.println ("  <WorksheetOptions xmlns='urn:schemas-microsoft-com:office:excel'>");
 			out.println ("   <PageSetup>");
-			out.println ("    <Header x:Margin='0.3' x:Data='&amp;C&amp;&quot;微軟正黑體,粗體&quot;"+info.get("school_year")+"學年度第"+info.get("school_term")+"學期專任教師留校節次表&#10;"+bl.getWeekOfDay4Zh(i, "星期")+"'/>");
+			if(kind.equals("1")){
+				out.println ("    <Header x:Margin='0.3' x:Data='&amp;C&amp;&quot;微軟正黑體,粗體&quot;"+info.get("school_year")+"學年度第"+info.get("school_term")+"學期專任教師課後輔導節次表&#10;"+bl.getWeekOfDay4Zh(i, "星期")+"'/>");
+			}else{
+				out.println ("    <Header x:Margin='0.3' x:Data='&amp;C&amp;&quot;微軟正黑體,粗體&quot;"+info.get("school_year")+"學年度第"+info.get("school_term")+"學期專任教師生活輔導節次表&#10;"+bl.getWeekOfDay4Zh(i, "星期")+"'/>");
+			}
 			out.println ("    <Footer x:Margin='0.3'/>");
 			out.println ("    <PageMargins x:Bottom='0.75' x:Left='0.25' x:Right='0.25' x:Top='0.75'/>");
 			out.println ("   </PageSetup>");

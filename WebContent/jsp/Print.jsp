@@ -21,7 +21,8 @@
 		
 		<td width="100%">
 		<div class="btn-group">
-			<button class="btn btn-default" name="method:StayTimePrint">留校時間</button>
+			<button class="btn btn-default" name="method:StayTimePrint">課後輔導時間</button>
+			<button class="btn btn-default" name="method:StayTimePrintLife">生活輔導時間</button>
 			<button class="btn btn-default" name="method:RetirePrint">退撫資料</button>
 			<button class="btn btn-default" name="method:BirthPrint">當月生日</button>
 		</div>
