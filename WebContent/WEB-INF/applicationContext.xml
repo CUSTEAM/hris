@@ -13,7 +13,7 @@
        <property name="jndiName">
           <value>java:comp/env/jdbc/mysql</value>
        </property>
-    </bean>
+   </bean>
     
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
         <property name="dataSource"><ref local="dataSource"/></property>
@@ -21,16 +21,17 @@
             <props>
                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                <prop key="hibernate.show_sql">false</prop>
-			   <prop key="hibernate.cache.provider_class">com.opensymphony.oscache.hibernate.OSCacheProvider</prop>
-			   <prop key="hibernate.cache.use_query_cache">true</prop>
+			   <!-- prop key="hibernate.cache.provider_class">com.opensymphony.oscache.hibernate.OSCacheProvider</prop-->
+			   <!-- prop key="hibernate.cache.use_query_cache">true</prop-->
 	     	</props>
-        </property>     
+        </property>       
         <property name="mappingResources">
             <list>
             	<value>model/Dilg.hbm.xml</value>
             	<value>model/DilgApply.hbm.xml</value>
             	<value>model/Stmd.hbm.xml</value>
             	<value>model/POSTALMails.hbm.xml</value>
+            	<value>model/AmsDocApply.xml</value>            	
             </list>
         </property>
     </bean>

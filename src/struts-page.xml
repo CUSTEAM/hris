@@ -38,4 +38,14 @@
 		</action>
 	</package>
 	
+	<package name="ams" extends="abstract_struts" namespace="/">
+		<action name="AmsWorkDateManager" class="action.ams.AmsWorkDateManagerAction">
+			<result>jsp/ams/AmsWorkDateManager.jsp</result>
+		</action>
+		
+		<action name="AmsDocAppManager" class="action.ams.AmsDocAppManagerAction">
+			<result>jsp/ams/AmsDocAppManager.jsp</result>
+		</action>
+	</package>
+	
 </struts>
