@@ -46,6 +46,10 @@
 		<action name="AmsDocAppManager" class="action.ams.AmsDocAppManagerAction">
 			<result>jsp/ams/AmsDocAppManager.jsp</result>
 		</action>
+		
+		<action name="EmplStaticWorkManager" class="action.ams.EmplStaticWorkManagerAction">
+			<result>jsp/ams/EmplStaticWorkManager.jsp</result>
+		</action>
 	</package>
 	
 </struts>
