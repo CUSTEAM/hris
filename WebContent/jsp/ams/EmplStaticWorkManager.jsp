@@ -27,19 +27,26 @@
   			<tr>
   				<td>
 				
-				<select class="selectpicker dropup" title="班別" data-header="下列班別起迄時間均以第一個上班日為參考" name="shift">
+				<select class="selectpicker dropup" data-header="下列班別起迄時間均以第一個上班日為參考" name="shift">
 					<option <c:if test="${shift eq 'all'}">selected</c:if> value="all">所有班別</option>
 					<c:forEach items="${shifts}" var="s">					
 					<option <c:if test="${!empty s.in1}">data-subtext="${s.in1}~${s.out1}"</c:if> <c:if test="${s.id eq shift}">selected</c:if> value="${s.id}">${s.name}</option>						
 					</c:forEach>
 				</select>
 				
-  				<select class="selectpicker dropup" title="單位" data-header="請選擇教職員直屬單位" name="unit">
+  				<select class="selectpicker dropup" data-header="請選擇教職員主聘系所/單位" name="unit">
 					<option value="">所有單位</option>
 					<c:forEach items="${units}" var="u">
 					<option data-subtext="${u.name}" <c:if test="${u.id eq unit}">selected</c:if> value="${u.id}">${u.sname}</option>						
 					</c:forEach>
-				</select>				
+				</select>	
+				
+				<select class="selectpicker dropup" data-header="請選擇教職員行政單位" name="unitModule">
+					<option value="">所有單位</option>
+					<c:forEach items="${units}" var="u">
+					<option data-subtext="${u.name}" <c:if test="${u.id eq unitModule}">selected</c:if> value="${u.id}">${u.sname}</option>						
+					</c:forEach>
+				</select>			
   				</td>  			
   			</tr>
   			<tr>
@@ -68,8 +75,10 @@
   			
  		<tr>
  			<td>姓名</td>
- 			<td>單位</td>
  			<td>職稱</td>
+ 			<td>主聘系所/單位</td>
+ 			<td>行政單位</td>
+ 			
  			<td width="50%">
  			<select class="selectpicker dropup" title="班別" data-header="下列班別起迄時間均以第一個上班日為參考" id="stemp">
 					<option <c:if test="${shift eq 'all'}">selected</c:if> value="all">所有班別</option>
@@ -83,8 +92,10 @@
 		<c:forEach items="${empls}" var="e">
 		<tr>
  			<td nowrap>${e.cname}</td>
- 			<td nowrap>${e.unitName}</td>
  			<td nowrap>${e.sname}</td>
+ 			<td nowrap>${e.unitName}</td>
+ 			<td nowrap>${e.unitModule}</td>
+ 			
  			<td nowrap>
  			<input type="hidden" name="Oid" id="Oid${e.Oid}" value="" />
  			

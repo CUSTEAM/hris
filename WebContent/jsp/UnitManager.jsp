@@ -80,7 +80,7 @@ $(function () {
 	                    <input type="hidden" name="check" id="check${c.id}${s.id}"/>
 		                <input type="hidden" name="campus" value="${c.id}" />
 		                <input type="hidden" name="pid" value="0" />
-		                <input type="text" name="name" class="span3" placeholder="建立一級單位"/>
+		                <input type="text" name="name" class="form-control" placeholder="建立一級單位"/>
 		                <button class="btn btn-link" onClick="$('#check${c.id}${s.id}').val('check')" name="method:addUnit" type="submit">建立</button>
 	               </li>
 	            </ul>

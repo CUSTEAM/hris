@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-<title>單位資料管理</title>
+<title>單位資料管理??</title>
 <script src="/eis/inc/js/plugin/bootstrap-typeahead.js"></script>
 <script src="/eis/inc/js/plugin/json2.js"></script>
 <script src="/eis/inc/js/plugin/jquery-ui.js"></script>
@@ -109,7 +109,9 @@ $(document).ready(function() {
 	
 	<tr>
 		<td>英文名稱</td>
-		<td><input class="form-control" type="text" name="ename" value="${unit.ename}"/></td>
+		<td>
+		<input type="hidden" name="id" readonly class="span1" value="${unit.id}"/>
+		<input class="form-control" type="text" name="ename" value="${unit.ename}"/></td>
 	</tr>
 	
 	<tr>

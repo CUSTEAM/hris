@@ -108,10 +108,14 @@ public class UnitManagerAction extends BaseAction{
 		int id;
 		for(int i=0; i<check.length; i++){
 			
-			if(!check[i].equals("")){				
-				id=(df.sqlGetInt("SELECT id FROM CODE_UNIT WHERE id LIKE '"+campus[i]+"%' ORDER BY id DESC LIMIT 1")+1);				
+			if(!check[i].equals("")){
+				
+				id=(df.sqlGetInt("SELECT id FROM CODE_UNIT ORDER BY id*1 DESC LIMIT 1"))+1;				
+				
 				df.exSql("INSERT INTO CODE_UNIT(id, campus, pid, name)VALUES" +
 				"('"+id+"', '"+campus[i]+"', '"+pid[i]+"', '"+name[i]+"')");
+				
+				
 				unit=df.sqlGetMap("SELECT * FROM CODE_UNIT WHERE id='"+id+"'");				
 				request.setAttribute("unit", unit);
 				return "editUnit";
@@ -121,16 +125,28 @@ public class UnitManagerAction extends BaseAction{
 	}	
 	
 	public String saveUnit(){
+		
+		
+		
 		if(pid[0].equals("")){pid[0]="0";}
+		
+		System.out.println(pid[0]+", "+id);
 		
 		df.exSql("UPDATE CODE_UNIT SET campus='"+campus[0]+"',pid='"+pid[0]+"',name='"+name[0]+"',sname='"+sname+"'," +
 		"ename='"+ename+"',location='"+location+"',phone='"+phone+"',fax='"+fax+"',email='"+email+"',website='"+website+"'," +
 		"leader='"+leader+"', assistant='"+assistant+"' WHERE id='"+id+"'");
+		
+		
 		Map unit=df.sqlGetMap("SELECT * FROM CODE_UNIT WHERE id='"+id+"'");		
+		
+		
 		try{nameno=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("leader")+"'");}catch(Exception e){}
 		try{ass=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("assistant")+"'");}catch(Exception e){}
 		request.setAttribute("unit", unit);		
-		//du.updateUnit(getContext());
+		
+		
+		
+		
 		return "editUnit";
 	}
 	
