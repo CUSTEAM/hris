@@ -5,17 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
-<title>Insert title here</title>
+<title>單位資料管理</title>
 <script src="/eis/inc/js/plugin/bootstrap-typeahead.js"></script>
 <script src="/eis/inc/js/plugin/json2.js"></script>
 <script src="/eis/inc/js/plugin/jquery-ui.js"></script>
 <script src="/eis/inc/js/plugin/bootstrap-tooltip.js"></script>
 <script src="/eis/inc/js/plugin/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
 <script>  
-$(document).ready(function() {
-	
+$(document).ready(function() {	
 	$("#idiot").typeahead({
 		remote:"#leader",
 		source : [],
@@ -77,24 +74,13 @@ $(document).ready(function() {
 	});
 	
 });
-
-
-
 </script>
-
-
 </head>
 <body>
 
-
-
-
-
-
-
-<div class="alert">
+<div class="bs-callout bs-callout-warning" id="callout-helper-pull-navbar">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>校區資料管理?</strong>
+    <strong>系所資料管理</strong>
 </div>
 
 <form action="UnitManager" class="form" method="post">
@@ -105,15 +91,15 @@ $(document).ready(function() {
 		
 <table class="table">
 	<tr>
-		<td nowrap>名稱</td>
-		<td width="100%">
+		<td>名稱</td>
+		<td >
 		<input type="hidden" name="id" readonly class="span1" value="${unit.id}"/>
 		<input class="form-control" type="text" name="name" value="${unit.name}"/>
 		</td>
 	</tr>
 	
 	<tr>
-		<td>英文名稱</td>
+		<td nowrap>英文名稱</td>
 		<td>
 		<input type="text" class="form-control" name="ename" value="${unit.ename}"/>
 		</td>
@@ -121,7 +107,7 @@ $(document).ready(function() {
 	
 	<tr>
 		<td>電話</td>
-		<td><input class="form-control" type="text" name="phone" value="${unit.phone}"/></td>
+		<td width="100%"><input class="form-control" type="text" name="phone" value="${unit.phone}"/></td>
 	</tr>
 	
 	<tr>
@@ -130,7 +116,7 @@ $(document).ready(function() {
 	</tr>
 	
 	<tr>
-		<td>電子郵件</td>
+		<td nowrap>電子郵件</td>
 		<td><input class="form-control" type="text" name="email" value="${unit.email}"/></td>
 	</tr>
 	
