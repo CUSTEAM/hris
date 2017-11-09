@@ -16,35 +16,15 @@
 <script>  
 $(document).ready(function() {
 	
-	$("input[id='idiot']").typeahead({
-		remote:"#leader",
+	$(".eoid").typeahead({
+		//remote:"#agent",
 		source : [],
 		items : 10,
 		updateSource:function(inputVal, callback){			
 			$.ajax({
-				url:"/eis/autoCompleteEmpl",
+				url:"/eis/autoCompleteEmplOid",
 			    dataType: 'jsonp',
-			    jsonp:'back',          //jsonp请求方法
-			    data:{nameno:inputVal},
-			    cache:false,
-			    type:'POST',
-			    success: function(d) {
-			    	
-			    	callback(d.list);
-			    }
-			});
-		}		
-	});
-	
-	$("#ass").typeahead({
-		remote:"#assistant",
-		source : [],
-		items : 10,
-		updateSource:function(inputVal, callback){			
-			$.ajax({
-				url:"/eis/autoCompleteEmpl",
-			    dataType: 'jsonp',
-			    jsonp:'back',          //jsonp请求方法
+			    jsonp:'back',          //jsonp請求方法
 			    data:{nameno:inputVal},
 			    cache:false,
 			    type:'POST',
@@ -78,53 +58,59 @@ $(document).ready(function() {
 </div>
 
 <form action="UnitManager" class="form" method="post">
-
-
-
-
-		
+<div class="panel panel-primary">
+<div class="panel-heading">${unit.name}</div>	
 <table class="table">
 	<tr>
-		<td nowrap>校區名稱</td>
-		<td width="100%">
-		<input type="hidden" name="id" readonly class="form-control" value="${unit.id}"/>
+		<td>
+		
+		
+		
+		<input type="hidden" name="id" value="${unit.id}"/>
+		
+		<p>
+		<div class="input-group">
+		<span class="input-group-addon">校區名稱</span>
 		<input type="text" name="name" class="form-control" value="${unit.name}"/>
+		</div>
+		</p>
+		
+		<p>
+		<div class="input-group">
+		<span class="input-group-addon">校區地址</span>
+		<input class="form-control" type="text" name="ename" value="${unit.address}"/>
+		</div>
+		</p>
+		
+		<p>
+		<div class="input-group">
+		<span class="input-group-addon">校區主管</span>
+		<input type="text" autocomplete="off" class="form-control eoid" id="leader" <c:if test="${!empty unit.leaderOid}">value="${unit.leaderOid},${unit.leaderName}"</c:if> name="leader" onClick="$(this).val('')"/>
+		</div>
+		</p>
+		
+		<p>
+		<div class="input-group">
+		<span class="input-group-addon">主管助理</span>
+		<input type="text" autocomplete="off"  class="form-control eoid" id="assistant" <c:if test="${!empty unit.assOid}">value="${unit.assOid},${unit.assName}"</c:if> name="assistant" onClick="$(this).val('')"/>
+		</div>
+		</p>
+		
+		
 		</td>
 	</tr>
 	
-	<tr>
-		<td>地址</td>
-		<td><input class="form-control" type="text" name="ename" value="${unit.address}"/></td>
-	</tr>
+	
 	
 	<tr>
-		<td>主管</td>
-		<td>
-		<input class="form-control" onClick="$('#idiot').val(''), $('#leader').val('');" autocomplete="off" 
-		type="text" id="idiot" value="${nameno}" name="nameno" data-provide="typeahead" placeholder="姓名或身分證" />
-		<input type="hidden" id="leader" value="${unit.leader}" name="leader"/>
-		</td>
-	</tr>
-	
-	<tr>
-		<td>助理</td>
-		<td>
-		<input class="form-control" onClick="$('#ass').val(''), $('#assistant').val('');" autocomplete="off" 
-		type="text" id="ass" value="${ass}" name="ass" data-provide="typeahead" placeholder="姓名或身分證" />
-		<input type="hidden" id="assistant" value="${unit.assistant}" name="assistant"/>
-		</td>
-	</tr>
-	
-	<tr>
-		<td></td>
 		<td>
 		<button class="btn btn-danger" name="method:saveCampus" type="submit">儲存</button>
-		<a href="UnitManager" class="btn">離開</a>
+		<a href="UnitManager" class="btn btn-default">離開</a>
 		</td>
 	</tr>
 	
 </table>
-
+</div>
 
 
 </form>

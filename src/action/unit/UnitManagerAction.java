@@ -1,68 +1,35 @@
 package action.unit;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import action.BaseAction;
+import model.CODE_UNIT;
 
 public class UnitManagerAction extends BaseAction{
 	
-	public String check[];
-	public String campus[];
-	public String pid[];
-	public String name[];
-	
-	public String leader;
-	public String nameno;
-	
-	public String id;
-	public String sname;
-	public String ename;
-	public String location;
-	public String phone;
-	public String fax;
-	public String website;
-	public String email;
-	
-	public String assistant;
-	public String military;
-	public String ass;
-	public String mil;
+	public String check[],campus[],pid[],name[];	
+	public String leader, id, sname, ename, location, phone, fax, website, email, assistant;
 	
 	public String execute(){
 		
-		Map unit;
-		if(request.getParameter("uid")!=null){//2級單位
-			unit=df.sqlGetMap("SELECT * FROM CODE_UNIT WHERE id='"+request.getParameter("uid")+"'");
-			try{nameno=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("leader")+"'");}catch(Exception e){}	
-			try{ass=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("assistant")+"'");}catch(Exception e){}
-			request.setAttribute("unit", unit);	
+		if(request.getParameter("uid")!=null){//2級單位			
+			request.setAttribute("unit", getLederOrAss(request.getParameter("uid"), "CODE_UNIT"));	
 			return "editUnit";
 		}
 		
-		if(request.getParameter("cid")!=null){//校區
-			unit=df.sqlGetMap("SELECT * FROM CODE_CAMPUS WHERE id='"+request.getParameter("cid")+"'");
-			try{nameno=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("leader")+"'");}catch(Exception e){}	
-			try{ass=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("assistant")+"'");}catch(Exception e){}
-			request.setAttribute("unit", unit);
+		if(request.getParameter("cid")!=null){//校區			
+			request.setAttribute("unit", getLederOrAss(request.getParameter("cid"), "CODE_CAMPUS"));
 			return "editCampus";
 		}
 		
 		if(request.getParameter("callege")!=null){//院
-			unit=df.sqlGetMap("SELECT * FROM CODE_COLLEGE WHERE id='"+request.getParameter("callege")+"'");
-			try{nameno=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("leader")+"'");}catch(Exception e){}	
-			try{ass=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("assistant")+"'");}catch(Exception e){}
-			request.setAttribute("unit", unit);
+			request.setAttribute("unit", getLederOrAss(request.getParameter("callege"), "CODE_COLLEGE"));
 			return "editCollege";
 		}
 		
 		if(request.getParameter("dept")!=null){//系
-			unit=df.sqlGetMap("SELECT * FROM CODE_DEPT WHERE id='"+request.getParameter("dept")+"'");
-			try{nameno=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("director")+"'");}catch(Exception e){}
-			try{mil=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("military")+"'");}catch(Exception e){}	
-			try{ass=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("assistant")+"'");}catch(Exception e){}	
-			request.setAttribute("unit", unit);
+			request.setAttribute("unit", getLederOrAss(request.getParameter("dept"), "CODE_DEPT"));
 			return "editDept";
 		}
 		
@@ -83,28 +50,18 @@ public class UnitManagerAction extends BaseAction{
 		for(int i=0; i<tmp.size(); i++){
 			tmp.get(i).put("dept", dm.sqlGet("SELECT id, name, e.cname as leader, e1.cname as assistant FROM (CODE_DEPT c LEFT OUTER JOIN empl e ON c.director=e.idno)LEFT OUTER JOIN empl e1 ON e1.idno=c.assistant WHERE college='"+tmp.get(i).get("id")+"'"));
 		}
-		request.setAttribute("colls", tmp);
-		
-		
+		request.setAttribute("colls", tmp);		
 		return SUCCESS;
 	}
 	
-	public String saveDept(){
-		
+	public String saveDept(){		
 		df.exSql("UPDATE CODE_DEPT SET name='"+name[0]+"', ename='"+ename+
-		"',phone='"+phone+"',fax='"+fax+"',email='"+email+"',website='"+website+"',director='"+leader+"', assistant='"+assistant+"', military='"+military+"' WHERE id='"+id+"'");
-		
-		Map unit=df.sqlGetMap("SELECT * FROM CODE_DEPT WHERE id='"+id+"'");
-		request.setAttribute("unit", unit);
-		try{nameno=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("leader")+"'");}catch(Exception e){}
-		try{ass=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("assistant")+"'");}catch(Exception e){}
-		try{mil=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("military")+"'");}catch(Exception e){}
-		System.out.println(mil);
+		"',phone='"+phone+"',fax='"+fax+"',email='"+email+"',website='"+website+"',director='"+getEmpleId(leader)+"', assistant='"+getEmpleId(assistant)+"'WHERE id='"+id+"'");
+		request.setAttribute("unit", getLederOrAss(id, "CODE_DEPT"));
 		return "editDept";
 	}
 	
 	public String addUnit(){
-		Map unit;
 		int id;
 		for(int i=0; i<check.length; i++){
 			
@@ -115,58 +72,63 @@ public class UnitManagerAction extends BaseAction{
 				df.exSql("INSERT INTO CODE_UNIT(id, campus, pid, name)VALUES" +
 				"('"+id+"', '"+campus[i]+"', '"+pid[i]+"', '"+name[i]+"')");
 				
-				
-				unit=df.sqlGetMap("SELECT * FROM CODE_UNIT WHERE id='"+id+"'");				
-				request.setAttribute("unit", unit);
+				request.setAttribute("unit", df.sqlGetMap("SELECT * FROM CODE_UNIT WHERE id='"+id+"'"));
 				return "editUnit";
 			}
 		}		
 		return "editUnit";
 	}	
 	
-	public String saveUnit(){
-		
-		
-		
-		if(pid[0].equals("")){pid[0]="0";}
-		
-		System.out.println(pid[0]+", "+id);
-		
-		df.exSql("UPDATE CODE_UNIT SET campus='"+campus[0]+"',pid='"+pid[0]+"',name='"+name[0]+"',sname='"+sname+"'," +
-		"ename='"+ename+"',location='"+location+"',phone='"+phone+"',fax='"+fax+"',email='"+email+"',website='"+website+"'," +
-		"leader='"+leader+"', assistant='"+assistant+"' WHERE id='"+id+"'");
-		
-		
-		Map unit=df.sqlGetMap("SELECT * FROM CODE_UNIT WHERE id='"+id+"'");		
-		
-		
-		try{nameno=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("leader")+"'");}catch(Exception e){}
-		try{ass=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("assistant")+"'");}catch(Exception e){}
-		request.setAttribute("unit", unit);		
-		
-		
-		
-		
+	public String saveUnit(){		
+		CODE_UNIT c=new CODE_UNIT();
+		c.setId(id);
+		c.setCampus(campus[0]);
+		c.setPid(pid[0]);
+		c.setName(name[0]);
+		c.setSname(sname);
+		c.setEname(ename);
+		c.setLocation(location);
+		c.setPhone(phone);
+		c.setFax(fax);
+		c.setEmail(email);
+		c.setWebsite(website);
+		c.setLeader(getEmpleId(leader));
+		c.setAssistant(getEmpleId(assistant));
+		df.update(c);		
+		request.setAttribute("unit", getLederOrAss(id, "CODE_UNIT"));		
 		return "editUnit";
 	}
 	
 	public String saveCampus(){		
-		df.exSql("UPDATE CODE_CAMPUS SET name='"+name[0]+"', address='"+ename+"', leader='"+leader+"', assistant='"+assistant+"' WHERE id='"+id+"'");
-		Map unit=df.sqlGetMap("SELECT * FROM CODE_CAMPUS WHERE id='"+id+"'");
-		request.setAttribute("unit", unit);
-		try{nameno=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("leader")+"'");}catch(Exception e){}
-		try{ass=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("assistant")+"'");}catch(Exception e){}
+		df.exSql("UPDATE CODE_CAMPUS SET name='"+name[0]+"', address='"+ename+"', leader='"+getEmpleId(leader)+"', assistant='"+getEmpleId(assistant)+"' WHERE id='"+id+"'");
+		request.setAttribute("unit", getLederOrAss(id, "CODE_CAMPUS"));
 		return "editCampus";
 	}
 	
-	public String saveCollege(){
+	public String saveCollege(){		
 		df.exSql("UPDATE CODE_COLLEGE SET name='"+name[0]+"', ename='"+ename+
-		"',phone='"+phone+"',fax='"+fax+"',email='"+email+"',website='"+website+"',leader='"+leader+"', assistant='"+assistant+"' WHERE id='"+id+"'");
-		Map unit=df.sqlGetMap("SELECT * FROM CODE_COLLEGE WHERE id='"+id+"'");
-		request.setAttribute("unit", unit);
-		try{nameno=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("leader")+"'");}catch(Exception e){}
-		try{ass=df.sqlGetStr("SELECT cname FROM empl WHERE idno='"+unit.get("assistant")+"'");}catch(Exception e){}
+		"',phone='"+phone+"',fax='"+fax+"',email='"+email+"',website='"+website+"',leader='"+getEmpleId(leader)+"', assistant='"+getEmpleId(assistant)+"' WHERE id='"+id+"'");
+		request.setAttribute("unit", getLederOrAss(id, "CODE_COLLEGE"));
 		return "editCollege";
 	}
-
+	
+	private Map getLederOrAss(String id, String table){	
+		String leader="leader";
+		if(table.equals("CODE_DEPT"))leader="director";
+		return df.sqlGetMap("SELECT e.Oid as leaderOid, e.cname as leaderName, e1.Oid as assOid, e1.cname as assName, cc.* FROM "
+		+ "("+table+" cc LEFT OUTER JOIN empl e ON e.idno=cc."+leader+")LEFT OUTER JOIN empl e1 ON e1.idno=cc.assistant WHERE cc.id='"+id+"'");
+	}
+	
+	private String getEmpleId(String emplOid){		
+		if(emplOid.indexOf(",")>0){
+			emplOid=emplOid.substring(0, emplOid.indexOf(","));
+		}	
+		
+		if(emplOid.trim().length()>1){
+			
+			return df.sqlGetStr("SELECT idno FROM empl WHERE Oid="+emplOid);
+		}else{
+			return "";
+		}
+	}
 }

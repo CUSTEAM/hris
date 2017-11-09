@@ -16,37 +16,15 @@
 <script>  
 $(document).ready(function() {
 	
-	$("input[id='idiot']").typeahead({
-		remote:"#leader",
-		source : [],
-		items : 10,
-		updateSource:function(inputVal, callback){
-			
-			$.ajax({
-				url:"/eis/autoCompleteEmpl",
-			    dataType: 'jsonp',
-			    jsonp:'back',          //jsonp请求方法
-			    data:{nameno:inputVal},
-			    cache:false,
-			    type:'POST',
-			    success: function(d) {
-			    	
-			    	callback(d.list);
-			    }
-			});			
-			
-		}		
-	});	
-	
-	$("#ass").typeahead({
-		remote:"#assistant",
+	$(".eoid").typeahead({
+		//remote:"#agent",
 		source : [],
 		items : 10,
 		updateSource:function(inputVal, callback){			
 			$.ajax({
-				url:"/eis/autoCompleteEmpl",
+				url:"/eis/autoCompleteEmplOid",
 			    dataType: 'jsonp',
-			    jsonp:'back',          //jsonp请求方法
+			    jsonp:'back',          //jsonp請求方法
 			    data:{nameno:inputVal},
 			    cache:false,
 			    type:'POST',
@@ -80,75 +58,88 @@ $(document).ready(function() {
 </div>
 
 <form action="UnitManager" class="form" method="post">
-
-
-
-
-		
+<div class="panel panel-primary">
+<div class="panel-heading">${unit.name}</div>		
 <table class="table">
 	<tr>
-		<td nowrap>名稱</td>
-		<td width="100%">
+		
+		<td>
+		
+		
+		<p>
+		<div class="input-group">
+		<span class="input-group-addon">學院名稱</span>
 		<input type="hidden" name="id" readonly class="form-control" value="${unit.id}"/>
 		<input type="text" name="name" class="form-control" value="${unit.name}"/>
-		</td>
-	</tr>
-	
-	<tr>
-		<td>英文名稱</td>
-		<td>
+		</div>
+		</p>
+		
+		<p>
+		<div class="input-group">
+		<span class="input-group-addon">英文名稱</span>
 		<input type="text" class="form-control" name="ename" value="${unit.ename}"/>
+		</div>
+		</p>
+		
+		<p>
+		<div class="input-group">
+		<span class="input-group-addon">連絡電話</span>
+		<input type="text" name="phone" class="form-control" value="${unit.phone}"/>
+		</div>
+		</p>
+		
+		<p>
+		<div class="input-group">
+		<span class="input-group-addon">傳真電話</span>
+		<input type="text" name="fax" class="form-control" value="${unit.fax}"/>
+		</div>
+		</p>
+		
+		<p>
+		<div class="input-group">
+		<span class="input-group-addon">電子郵件</span>
+		<input type="text" name="email" class="form-control" value="${unit.email}"/>
+		</div>
+		</p>
+		
+		<p>
+		<div class="input-group">
+		<span class="input-group-addon">學院網址</span>
+		<input type="text" name="website"class="form-control" value="${unit.website}"/>
+		</div>
+		</p>
+		
+		<p>
+		<div class="input-group">
+		<span class="input-group-addon">學院主管</span>
+		<input type="text" autocomplete="off" class="form-control eoid" id="leader" <c:if test="${!empty unit.leaderOid}">value="${unit.leaderOid},${unit.leaderName}"</c:if> name="leader" onClick="$(this).val('')"/>
+		</div>
+		</p>
+		
+		<p>
+		<div class="input-group">
+		<span class="input-group-addon">主管助理</span>
+		<input type="text" autocomplete="off"  class="form-control eoid" id="assistant" <c:if test="${!empty unit.assOid}">value="${unit.assOid},${unit.assName}"</c:if> name="assistant" onClick="$(this).val('')"/>
+		</div>
+		</p>
+		
+		
 		</td>
+	
+	
+	
+	
 	</tr>
 	
 	<tr>
-		<td>電話</td>
-		<td><input type="text" name="phone" class="form-control" value="${unit.phone}"/></td>
-	</tr>
-	
-	<tr>
-		<td>傳真</td>
-		<td><input type="text" name="fax" class="form-control" value="${unit.fax}"/></td>
-	</tr>
-	
-	<tr>
-		<td>電子郵件</td>
-		<td><input type="text" name="email" class="form-control" value="${unit.email}"/></td>
-	</tr>
-	
-	<tr>
-		<td>網站</td>
-		<td><input type="text" name="website"class="form-control" value="${unit.website}"/></td>
-	</tr>
-	
-	<tr>
-		<td>院長</td>
-		<td>
-		<input class="form-control" onClick="$('#idiot').val(''), $('#leader').val('');" autocomplete="off" 
-		type="text" id="idiot" value="${nameno}" name="nameno" data-provide="typeahead" placeholder="姓名或身分證" />
-		<input type="hidden" id="leader" value="${unit.leader}" name="leader"/>
-		</td>
-	</tr>
-	
-	<tr>
-		<td>院助理</td>
-		<td>
-		<input class="form-control" onClick="$('#ass').val(''), $('#assistant').val('');" autocomplete="off" 
-		type="text" id="ass" value="${ass}" name="ass" data-provide="typeahead" placeholder="姓名或身分證" />
-		<input type="hidden" id="assistant" value="${unit.assistant}" name="assistant"/>
-		</td>
-	</tr>
-	
-	<tr>
-		<td></td>
 		<td>
 		<button class="btn btn-danger" name="method:saveCollege" type="submit">儲存</button>
-		<a href="UnitManager" class="btn">離開</a>
+		<a href="UnitManager" class="btn btn-default">離開</a>
 		</td>
 	</tr>
 	
 </table>
-
+</div>
 
 
 </form>

@@ -31,7 +31,8 @@
             	<value>model/DilgApply.hbm.xml</value>
             	<value>model/Stmd.hbm.xml</value>
             	<value>model/POSTALMails.hbm.xml</value>
-            	<value>model/AmsDocApply.xml</value>            	
+            	<value>model/AmsDocApply.xml</value>
+            	<value>model/CODE_UNIT.hbm.xml</value>
             </list>
         </property>
     </bean>

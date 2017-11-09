@@ -98,7 +98,7 @@ $(function () {
        <li><span><i class="icon-folder-open"></i> ${c.id}, ${c.name} <span class="label label-danger">${c.leader}</span> <span class="label label-default">${c.assistant}</span></span> <a class="btn btn-warning btn-xs" href="UnitManager?callege=${c.id}">管理</a>
            <ul>                
                <c:forEach items="${c.dept}" var="s">	
-               <li class="after"><span><i class="icon-plus-sign"></i> ${s.id}, ${s.name} <span class="label label-primary">${s.leader}</span> <span class="label label-default">${s.assistant}</span></span> <a class="btn btn-mini" href="UnitManager?dept=${s.id}">管理</a></li>
+               <li class="after"><span><i class="icon-plus-sign"></i> ${s.id}, ${s.name} <span class="label label-primary">${s.leader}</span> <span class="label label-default">${s.assistant}</span></span> <a class="btn btn-default btn-xs" href="UnitManager?dept=${s.id}">管理</a></li>
                </c:forEach>                
            </ul>
        </li>
