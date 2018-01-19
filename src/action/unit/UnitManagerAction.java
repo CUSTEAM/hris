@@ -37,9 +37,9 @@ public class UnitManagerAction extends BaseAction{
 		List<Map>allUnit=dm.sqlGet("SELECT id, name, e.cname as leader, e1.cname as assistant FROM (CODE_CAMPUS c LEFT OUTER JOIN empl e ON c.leader=e.idno)LEFT OUTER JOIN empl e1 ON e1.idno=c.assistant;");
 		List<Map>tmp;		
 		for(int i=0; i<allUnit.size(); i++){
-			tmp=dm.sqlGet("SELECT id, name, e.cname as leader, e1.cname as assistant FROM (CODE_UNIT c LEFT OUTER JOIN empl e ON c.leader=e.idno)LEFT OUTER JOIN empl e1 ON e1.idno=c.assistant WHERE pid='0' AND campus='"+allUnit.get(i).get("id")+"'");			
+			tmp=dm.sqlGet("SELECT id, name, e.cname as leader, e1.cname as assistant FROM (CODE_UNIT c LEFT OUTER JOIN empl e ON c.leader=e.idno)LEFT OUTER JOIN empl e1 ON e1.idno=c.assistant WHERE c.service!='0'AND pid='0' AND campus='"+allUnit.get(i).get("id")+"'");			
 			for(int j=0; j<tmp.size(); j++){				
-				tmp.get(j).put("sub_unit", dm.sqlGet("SELECT id, name, e.cname as leader, e1.cname as assistant FROM (CODE_UNIT c LEFT OUTER JOIN empl e ON c.leader=e.idno)LEFT OUTER JOIN empl e1 ON e1.idno=c.assistant WHERE pid='"+tmp.get(j).get("id")+"'"));
+				tmp.get(j).put("sub_unit", dm.sqlGet("SELECT id, name, e.cname as leader, e1.cname as assistant FROM (CODE_UNIT c LEFT OUTER JOIN empl e ON c.leader=e.idno)LEFT OUTER JOIN empl e1 ON e1.idno=c.assistant WHERE c.service!='0'AND pid='"+tmp.get(j).get("id")+"'"));
 			}			
 			allUnit.get(i).put("unit", tmp);
 		}

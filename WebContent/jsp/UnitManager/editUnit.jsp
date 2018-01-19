@@ -73,14 +73,22 @@ $(document).ready(function() {
 				<option <c:if test="${u.id eq unit.pid}">selected</c:if> value="${u.id}" class="${c.id}">${u.name}</option>
 				</c:forEach>
 			</c:forEach>
-		</select></p>
+		</select>
+		</p>
+		<p>
 		<div class="form-group has-default">		
 		<div class="input-group">
 		<span class="input-group-addon">單位名稱</span>
 		<input type="text" class="form-control" name="name" value="${unit.name}"/>
 		</div>
 		</div>
-		
+		</p>
+		<p>
+		<div class="input-group">
+		<span class="input-group-addon">簡短名稱</span>
+		<input class="form-control" type="text" name="sname" value="${unit.sname}"/>
+		</div>
+		</p>
 		
 		<div class="input-group">
 		<span class="input-group-addon">英文名稱</span>
